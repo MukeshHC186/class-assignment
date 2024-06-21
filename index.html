@@ -86,7 +86,7 @@
           <div class="links">
             <h3>Quick Links</h3>
             <ul>
-              <li><a href="#">Home</a></li>
+              <li><a href="#" id="home">Home</a></li>
               <li><a href="#">About</a></li>
               <li><a href="#">Email</a></li>
               <li><a href="#">Contact</a></li>
@@ -156,10 +156,10 @@
             acceptbtn.innerText="Accept"
 
             acceptbtn.addEventListener("click",()=>{
-                acceptedData("acceptedData",ele)
-                rejectedData(arr, index)
-                displayData(arr)
-                
+              acceptedData("acceptedData",ele)
+              rejectedData(arr,index)
+              displayData(arr)
+              alert("Accepted Successfully")
             })
 
             let rejectbtn=document.createElement("button")
@@ -167,10 +167,9 @@
             rejectbtn.innerText="Reject"
 
             rejectbtn.addEventListener("click",()=>{
-              
-                rejectedData(arr, index)
-                alert("Rejected Successfully")
-                displayData(arr)
+              rejectedData(arr,index)
+              displayData(arr)
+              alert("Rejected Successfully")
             })
 
             let holdbtn=document.createElement("button")
@@ -178,7 +177,10 @@
             holdbtn.innerText="Hold"
 
             holdbtn.addEventListener("click",()=>{
-                holdData("holdData",ele)
+              holdData("holdData",ele)
+              rejectedData(arr,index)
+              displayData(arr)
+              alert("Data Hold Successfully")
             })
 
             td3.append(acceptbtn,rejectbtn,holdbtn)
@@ -192,20 +194,17 @@
         let acceptedData=JSON.parse(localStorage.getItem("acceptedData"))||[]
         acceptedData.push(value)
         localStorage.setItem("acceptedData",JSON.stringify(acceptedData))
-        alert("Accepted Successfully")
     }
 
-    function rejectedData(dar,index){
-      dar.splice(index,1)
-      localStorage.setItem("dar", JSON.stringify(arr))
-
+    function rejectedData(rejectData,index){
+      rejectData.splice(index,1)
+      localStorage.setItem("userDetails", JSON.stringify(rejectData))
     }
 
     function holdData(key,value){
         let holdData=JSON.parse(localStorage.getItem("holdData"))||[]
         holdData.push(value)
         localStorage.setItem("holdData",JSON.stringify(holdData))
-        // alert("Accepted Successfully")
     }
 
 </script>
