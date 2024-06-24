@@ -106,7 +106,7 @@
         </footer>
 </body>
 <script>
-    let holdData=JSON.parse(localStorage.getItem("holdData"))||[]
+    let arr=JSON.parse(localStorage.getItem("holdData"))||[]
     let tbody=document.getElementById("tbody")
     function holdData1(data){
         tbody.innerHTML=null
@@ -123,6 +123,13 @@
             let acceptbtn=document.createElement("button")
             acceptbtn.id="acceptbtn"
             acceptbtn.innerText="Accept"
+            acceptbtn.addEventListener("click",()=>{
+              acceptedData("acceptedData",ele)
+              deletedData(arr,index)
+              alert("Accepted Successfully")
+              holdData1(arr)
+            })
+
 
           
         td2.append(acceptbtn)
@@ -132,7 +139,23 @@
         tbody.append(tr)
     })
 }
-holdData1(holdData)
+holdData1(arr)
 
+    function deletedData(data,index){
+      data.splice(index,1)
+      localStorage.setItem("holdData", JSON.stringify(data))
+    }
+
+function acceptedData(key,value){
+        let acceptedData=JSON.parse(localStorage.getItem("acceptedData"))||[]
+        acceptedData.push(value)
+        localStorage.setItem("acceptedData",JSON.stringify(acceptedData))
+    }
+
+
+    // function deletedData(rejectData,index){
+    //   rejectData.splice(index,1)
+    //   localStorage.setItem("userDetails", JSON.stringify(rejectData))
+    // }
 </script>
 </html>

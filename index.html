@@ -157,9 +157,9 @@
 
             acceptbtn.addEventListener("click",()=>{
               acceptedData("acceptedData",ele)
-              rejectedData(arr,index)
-              displayData(arr)
+              deletedData(arr,index)
               alert("Accepted Successfully")
+              displayData(arr)
             })
 
             let rejectbtn=document.createElement("button")
@@ -167,7 +167,8 @@
             rejectbtn.innerText="Reject"
 
             rejectbtn.addEventListener("click",()=>{
-              rejectedData(arr,index)
+              deletedData(arr,index)
+              rejectedData("rejectedData",ele)
               displayData(arr)
               alert("Rejected Successfully")
             })
@@ -178,7 +179,7 @@
 
             holdbtn.addEventListener("click",()=>{
               holdData("holdData",ele)
-              rejectedData(arr,index)
+              deletedData(arr,index)
               displayData(arr)
               alert("Data Hold Successfully")
             })
@@ -196,9 +197,15 @@
         localStorage.setItem("acceptedData",JSON.stringify(acceptedData))
     }
 
-    function rejectedData(rejectData,index){
+    function deletedData(rejectData,index){
       rejectData.splice(index,1)
-      localStorage.setItem("mk", JSON.stringify(rejectData))
+      localStorage.setItem("userDetails", JSON.stringify(rejectData))
+    }
+    
+    function rejectedData(key,value){
+      let rejectedData=JSON.parse(localStorage.getItem("rejectedData"))||[]
+      rejectedData.push(value)
+      localStorage.setItem("rejectedData",JSON.stringify(rejectedData))
     }
 
     function holdData(key,value){
